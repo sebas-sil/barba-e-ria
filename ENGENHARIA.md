@@ -19,7 +19,8 @@
   Dei o nome "Barba-e-ria" para o projeto. Achei engraçado.
 </details>
 
-## Reunião #2 com o cliente 2020-mar-14
+<details>
+  <summary>## Reunião #2 com o cliente 2020-mar-14</summary>
 
 Estes são os rabiscos da segunda reunião com o João, O Bigodudo para a criação de um sistema para ele.
 
@@ -38,3 +39,30 @@ Hoje voltei a falar com ele para apresentar a <strong>lista de requisitos</stron
   9. RNF01 - alto - importante - autenticar usuário, precisamos que o cliente que marcou o horário seja ele mesmo. Não deve ser armazenado login e senha;
   
   Após apresentar a lista de requisitos, João concordou com essa lista e concluímos <strong>o escopo</strong> do sistema. Estamos prontos para prosseguir e pedi para o João classificar a prioridade desses requisitos e qual <strong>a importância</strong> de cada um deles.
+</details>
+
+## Preparação para a reunião #3 (parte 1/3) - prototipo - 2020-mar-21
+
+Como os requisitos foram levantados corretamente (até o momento), comecei a fazer um protótipo de baixa fidelidade (para não ocupar muito meu tempo).
+O protótipo foi realizado com uma ferramenta online, apenas para que o cliente tenha uma ideia das principais funcionalidades do aplicativo (aqueles marcados como essenciais ou importantes). Assim, teremos aumentaremos a certeza sobre os principais pontos do sistema.
+
+<table>
+  <tr>
+    <td><img src="engenharia/login.png" title="login"/></td>
+    <td><img src="engenharia/agendamento.png" title="agendamento"/></td>
+  </tr>
+  <tr>
+    <td>Tela de Login</td>
+    <td>Tela de Agendamento</td>
+  </tr>  
+  <tr>
+    <td><img src="engenharia/agenda-barbeiro.png" title="agenda barbeiro"/></td>
+    <td><img src="engenharia/avaliação.png" title="avaliação"/></td>
+  </tr>
+  <tr>
+    <td>Tela de Agenda do Barbeiro</td>
+    <td>Tela de avaliação</td>
+  </tr> 
+  </table>
+  
+  Embora o cliente não tenha solicitado login por Facebook, Google ou Twitter... acredito que será uma boa surpresa.
