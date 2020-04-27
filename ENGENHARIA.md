@@ -69,7 +69,8 @@ O protótipo foi realizado com uma ferramenta online, apenas para que o cliente 
   Embora o cliente não tenha solicitado login por Facebook, Google ou Twitter... acredito que será uma boa surpresa.
 </details>
 
-## Preparação para a reunião #3 (parte 2/3) - cenários de uso - 2020-mar-28
+<details>
+  <summary>## Preparação para a reunião #3 (parte 2/3) - cenários de uso - 2020-mar-28</summary>
 
 Para garantir o entendimento de cada requisito, foi descrito o _cenário de uso_ de cada um deles com o maior número de detalhes possível.
 
@@ -108,3 +109,87 @@ Para garantir o entendimento de cada requisito, foi descrito o _cenário de uso_
 * UCC#09: autenticar usuário - ref. RNF#03
 
   Todos os usuários do sistema devem ser autenticados e ter permissão de acesso ao conteúdo do sistema. Para tal, o sistema apresentará uma tela de login para que o usuário digita seu login e a senha (pelo menos 8 caracteres alfanumérico) ou escolher um provedor oauth2 (Google, Facebook ou Twitter). Nenhuma outra tela do sistema pode ser acessada sem que o usuário passe antes pela tela de login. Caso o usuário não tenha um login e senha no sistema ele deve clicar em "criar conta", preencher o formulário e então se autenticar com seu login e senha (ou provedor oauth2). Os campos a serem preenchidos são nome, telefone, e-mail e uma foto para o avatar e destes somente o avatar é opcional. Cada usuário poderá ter apenas um cadastro no sistema que será validado pelo e-mail cadastrado
+</details>
+
+## Preparação para a reunião #3 (parte 3/3) - caso de uso - 2020-abr-04
+
+Com a descrição dos casos de cada requisito em cenários de caso de uso, estou pronto para desenhar os casos de uso do sistema. Primeiro criei o diagrama de caso de uso e depois descrevi cada caso de uso do diagrama.
+
+<img src="engenharia/Diagrama de caso de uso completo.png" title="Diagrama de caso de uso completo"/>
+
+| UC#01 | Autenticar usuário |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pre-condições       | O usuário deve ter acesso ao sistema |
+| Objetivo | Autenticar e autorizar o usuário |
+| pos-condições | O usuário estará autenticado |
+| Origem | UCC#09 |
+| Fluxo principal |  |
+|  | <ol><li>O sistema apresenta a tela de autenticação. </li><li>O usuário informa seu login e senha. </li><li>O usuário clica em "autenticar". </li><li>O sistema redireciona para a funcionalidade requisitada ou a tela de boas vindas</li></ol> |
+| Fluxo alternativo #1 | Usuário não tem cadastro (cadastro manual) |
+|  | <ol><li>O usuário clica em "cadastrar". </li><li>O usuário preenche o formulário de cadastro. </li><li>O sistema valida as informações. </li><li>O sistema envia a senha do usuário para o e-mail informado. </li><li>O sistema envia o usuário para o passo 1 do fluxo principal. </li><ol> |
+| Fluxo alternativo #2 | Usuário com login ou senha incorretos |
+|  | <ol><li>O sistema envia o usuário para o passo 1 do fluxo principal. </li><li>O sistema apresenta a mensagem de erro "usuário ou senha inválidos"</li><ol> |
+| Fluxo alternativo #3 | Autenticação Oauth2 |
+|  | <ol><li>O usuário escolhe autenticar-se por uma provedor externo clicando em um dos botões Oauth2 disponíveis. </li><li>O sistema se comunica com o provedor e valida as informações recebidas. </li><li>O sistema encaminha o usuário para o passo 4 do fluxo principal</li></ol> |
+| Fluxo alternativo #4 | Usuário já existe |
+|  | <ol><li>O sistema valida que o e-mail informado já existe. </li><li>O sistema permanece da tela de cadastro. </li><li>O sistema apresenta o erro de "usuário já cadastrado". </li></ol> |
+  
+| UC#02 | Marcar horário |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pre-condições | <ul> <li>O cliente deve estar autenticado</li> <li>Devem existir serviços cadastrados</li> <li>Devem existir barbeiros cadastrados</li> </ul> |
+| objetivo | Agendar um serviço com o barbeiro em um determinado horário |
+| pos-condições | Agendamento realizado com sucesso e aparecendo no histórico |
+| Origem | UCC#01 |
+| Fluxo principal |  |
+|  | <ol> <li>O sistema apresenta a tela de agendamento.</li> <li>O usuário escolhe um serviço.</li> <li>O usuário escolhe um barbeiro.</li> <li>O sistema apresenta a agenda do barbeiro com os horários livres.</li> <li>O usuário escolhe uma janela livre.</li> <li>O usuário clica em "agendar horário".</li> <li>O sistema valida as informações.</li> <li>O sistema apresenta a tela de boas vindas.</li> <li>O sistema mostra a mensagem de "agendamento realizado com sucesso".</li> </ol> |
+| Fluxo alternativo #2 | Janela ocupada |
+|  | <ol> <li>O sistema verifica que a janela escolhida não esta livre.<li> <li>O sistema permanece na tela de agendamento.</li> <li>O sistema marca a janela escolhida como "ocupada".</li> <li>O sistema mostra a mensagem de "O horário escolhido não esta livre.".</li> <li>O sistema encaminha o usuário para o passo 5 do fluxo principal.</li>  </ol> |
+
+| UC#3 | Cancelar agendamento |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pre-condição | <ul> <li>O cliente deve estar autenticado</li> <li>Devem existir agendamentos cadastrados</li> </ul> |
+| objetivo | Cancelar um agendamento previamente realizado |
+| pos-condições | O agendamento aparece como "cancelado" no histórico |
+| Origem | UCC#02 |
+| Fluxo principal | <ol> <li>O usuário clica em "ver histórico".</li> <li>O sistema apresenta a tela de histórico.</li> <li>O usuário clica em "cancelar agendamento" no item que deseja cancelar.</li> <li>O sistema cancela o agendamento.</li> <li>O sistema permanece na tela de histórico.</li> <li>O sistema marca o agendamento escolhido como "cancelado".</li>  </ol> |
+| Fluxo alternativo #1 | O agendamento não pode ser cancelado |
+|  | <ol> <li>O sistema permanece na tela de histórico de agendamento.</li> <li>O sistema mostra a mensagem "Não foi possível cancelar o agendamento" e o motivo da impossibilidade.</li> <li>O sistema encaminha o usuário para o passo 3 do fluxo principal.</li>  </ol> |
+
+| UC #4 | Avaliar serviço |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pre-condição | <ul> <li>O usuário deve estar autenticado</li> <li>O serviço já estar concluído (pago)</li>  </ul> |
+| objetivo | Avaliar o serviço prestado pelo barbeiro |
+| pos-condições | Agendamento é mostrado no histórico já com a avaliação |
+| Origem | UCC#03 |
+| Fluxo principal |  |
+|  | <ol> <li>O cliente clica em "ver histórico".</li> <li>O sistema apresenta a tela de histórico.</li> <li>O cliente clica em "avaliar serviço" no item que deseja avaliar.</li> <li>O sistema apresenta a tela de avaliação.</li> <li>O cliente clica na quantidade de estrelas que deseja dar ao serviço.</li> <li>O cliente clica em "finalizar".</li> <li>O sistema apresenta a tela de histórico.</li> <li>O sistema marca o agendamento como avaliado (com a nota).</li>  </ol> |
+| Fluxo alternativo #1 | O serviço não pode ser avaliado |
+|  | <ol> <li>O sistema apresenta a tela de histórico.</li> <li>O sistema mostra a mensagem "Não foi possível avaliar o serviço" e o motivo da impossibilidade.  <li>O sistema encaminha o cliente para o passo 3 do fluxo principal.</li> </ol> |
+
+| UC#5 | Verificar histórico |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pre-condição | <ul> <li>O usuário deve estar autenticado.</li>  </ul> |
+| objetivo | Listar os agendamentos do cliente ou do barbeiro |
+| pos-condição | Lista dos agendamentos |
+| Origem | UCC#05 |
+| Fluxo principal |  |
+|  | <ol> <li>O cliente clica em "ver histórico".</li> <li>O sistema apresenta a tela de histórico.</li> <li>O sistema lista os agendamentos por ordem que serão executados (mais recente).</li>  </ol> |
+| Fluxo alternativo #1 | Não existem agendamentos |
+|  | <ol> <li>O sistema apresenta a tela de agendamentos.</li> <li>O sistema mostra a mensagem "Não existem agendamentos".</li> <li>O sistema permanece na tela de histórico.</li> </ol> |
+| Fluxo alternativo #2 | Filtro apicado |
+|  | <ol> <li>O usuário escolhe um filtro para aplicar a lista.</li> <li>O sistema aplica o filtro escolhido.</li> <li>O sistema encaminha o usuário para o passo 3 do fluxo principal.</li>  </ol> |
+| Fluxo alternativo #3 | Ordem aplicada |
+|  | <ol> <li>O usuário escolhe uma ordenação para aplicar a lista.</li> <li>O sistema aplica a ordenação escolhido.</li> <li>O sistema encaminha o usuário para o passo 3 do fluxo principal.</li> </ol> |
+
+| UC #6 | Atualizar perfil |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| pre-condição | O usuário deve estar autenticado. |
+| objetivo | Atualizar as informações de cadastro do usuário |
+| pos-condição | Informações atualizadas |
+| Origem | UCC#06 |
+| Fluxo principal |  |
+|  | <ol> <li>O usuário clica no seu avatar.</li> <li>O sistema apresenta a tela de cadastro para o usuário.</li> <li>O usuário clica no campo que deseja alterar.</li> <li>O usuário insere a nova informação.</li> <li>O usuário clica em salvar".</li> <li>O sistema valida e salva as informações.</li> <li>O sistema permanece na tela de cadastro.</li>  </ol> |
+| Fluxo alternativo #1 | Campo obrigatório não informado |
+|  | <ol> <li>O sistema mostra a mensagem de "campo não informado" e o nome do campo.</li> <li>O sistema permanece na tela de cadastro.</li>  </ol> |
+| Fluxo alternativo #2 | Usuário informa e-mail já existente |
+|  | <ol> <li>O sistema mostra a mensagem de "e-mail já cadastrado". <li>O sistema permanece na tela de cadastro.</li> </ol> |
