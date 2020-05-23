@@ -111,7 +111,8 @@ Para garantir o entendimento de cada requisito, foi descrito o _cenário de uso_
   Todos os usuários do sistema devem ser autenticados e ter permissão de acesso ao conteúdo do sistema. Para tal, o sistema apresentará uma tela de login para que o usuário digita seu login e a senha (pelo menos 8 caracteres alfanumérico) ou escolher um provedor oauth2 (Google, Facebook ou Twitter). Nenhuma outra tela do sistema pode ser acessada sem que o usuário passe antes pela tela de login. Caso o usuário não tenha um login e senha no sistema ele deve clicar em "criar conta", preencher o formulário e então se autenticar com seu login e senha (ou provedor oauth2). Os campos a serem preenchidos são nome, telefone, e-mail e uma foto para o avatar e destes somente o avatar é opcional. Cada usuário poderá ter apenas um cadastro no sistema que será validado pelo e-mail cadastrado
 </details>
 
-## Preparação para a reunião #3 (parte 3/3) - caso de uso - 2020-abr-04
+<details>
+  <summary>## Preparação para a reunião #3 (parte 3/3) - caso de uso - 2020-abr-04</summary>
 
 Com a descrição dos casos de cada requisito em cenários de caso de uso, estou pronto para desenhar os casos de uso do sistema. Primeiro criei o diagrama de caso de uso e depois descrevi cada caso de uso do diagrama.
 
@@ -193,3 +194,12 @@ Com a descrição dos casos de cada requisito em cenários de caso de uso, estou
 |  | <ol> <li>O sistema mostra a mensagem de "campo não informado" e o nome do campo.</li> <li>O sistema permanece na tela de cadastro.</li>  </ol> |
 | Fluxo alternativo #2 | Usuário informa e-mail já existente |
 |  | <ol> <li>O sistema mostra a mensagem de "e-mail já cadastrado". <li>O sistema permanece na tela de cadastro.</li> </ol> |
+</details>
+
+## Preparação para a reunião #3 (parte 3/3) - diagrama de classes - 2020-abr-11
+Depois de descrito os casos de uso, o entendimento está melhor sobre o que o sistema deve fazer e do que precisamos para fazer. Assim, desenhamos o primeiro esboço do diagrama de classes. Não é necessário se preocupar com assertividade neste momento, apenas passe para o papel o que ja tem.
+
+<p align="center">
+  <img src="engenharia/Diagrama de classes.png" title="Diagrama de classes uso completo"/>
+</p>
+Como pode ser visto, o diagrama não tem tipos (exceto a generalização) nem cardinalidade. Apenas removemos de nossas mentes e materializamos.
